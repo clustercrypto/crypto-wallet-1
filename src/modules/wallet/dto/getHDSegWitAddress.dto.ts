@@ -12,12 +12,15 @@ import {
   IsPathSeparatedBySlash,
   IsPathStartsWithMaster
 } from "../../../utils/validator/isValidDerivationPath.decorator"
+import { IsSeedLengthValid, IsSeedValid } from "../../../utils/validator/isValidSeed.decorator"
 
 @InputType("WalletGetSegWitAddressDto")
 export class GetHDSegWitAddressDto extends DTOBase {
   @Field({ description: "The seed phrase (mnemonic)" })
   @IsNotEmpty()
   @IsString()
+  @IsSeedValid()
+  @IsSeedLengthValid()
   @MaxLength(500)
   @Expose()
   seed: string
@@ -55,7 +58,6 @@ export class GetHDSegWitAddressDto extends DTOBase {
   @Field({ nullable: true, description: "The optional bit39 password", defaultValue: "" })
   @IsOptional()
   @IsString()
-  @MinLength(5)
   @MaxLength(100)
   @Expose()
   password: string

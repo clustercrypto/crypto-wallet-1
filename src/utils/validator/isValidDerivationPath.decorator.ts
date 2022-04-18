@@ -123,9 +123,8 @@ export function IsPathNumberOrHardenedNumber(validationOptions?: ValidationOptio
             if (indexValue > MAX_INDEX_VALUE) {
               return false
             }
-
-            return true
           }
+          return true
         }
       }
     })

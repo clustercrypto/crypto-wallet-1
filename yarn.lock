@@ -4310,6 +4310,11 @@ is-docker@^2.0.0:
   resolved "https://registry.yarnpkg.com/is-docker/-/is-docker-2.2.1.tgz#33eeabe23cfe86f14bde4408a02c0cfb853acdaa"
   integrity sha512-F+i2BKsFrH66iaUFc0woD8sLy8getkwTwtOBjvs56Cx4CgJDeKQeqfz8wAYiSb8JOprWhHH5p77PbmYCvvUuXQ==
 
+is-english@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/is-english/-/is-english-1.3.0.tgz#925e0d9fb9b6776ff26374f1e80158fb6d09c571"
+  integrity sha512-oG6nzjv8YGlqp8ioGhoJPBsOetUKjWKir0hrlGmlvkZopOZq6VmGJ+qErxHMmyE7XSyOB+/QikqD9WXawRobhQ==
+
 is-extglob@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/is-extglob/-/is-extglob-2.1.1.tgz#a88c02535791f02ed37c76a1b9ea9773c833f8c2"
