@@ -4,6 +4,14 @@ import { Field, InputType } from "type-graphql"
 
 import { NETWORK } from "../../../enum"
 import { DTOBase } from "../../../utils/dto/base.dto"
+import {
+  IsPathAccountLevelHardened,
+  IsPathBIP84Purpose,
+  IsPathBitcoinType,
+  IsPathNumberOrHardenedNumber,
+  IsPathSeparatedBySlash,
+  IsPathStartsWithMaster
+} from "../../../utils/validator/isValidDerivationPath.decorator"
 
 @InputType("WalletGetSegWitAddressDto")
 export class GetHDSegWitAddressDto extends DTOBase {
@@ -14,9 +22,24 @@ export class GetHDSegWitAddressDto extends DTOBase {
   @Expose()
   seed: string
 
-  @Field({ description: 'The level path to generate the address, use "\'" to mark as hardened.' })
+  // only bip-94 proposal is supported
+  @Field({
+    description: `The level path to generate the address, use \"'\" to mark as hardened.\
+      \n\"m / purpose' / coin_type' / account' / change / address_index\" \
+      \n - must starts with m \
+      \n - currently we only support purpose to be 84' \
+      \n - coin_type to be 0' (bitcoin) \
+      \n - account level must be hardened to improve security\
+      `
+  })
   @IsNotEmpty()
   @IsString()
+  @IsPathSeparatedBySlash()
+  @IsPathStartsWithMaster()
+  @IsPathBIP84Purpose()
+  @IsPathBitcoinType()
+  @IsPathAccountLevelHardened()
+  @IsPathNumberOrHardenedNumber()
   @MinLength(4)
   @MaxLength(300)
   @Expose()
@@ -32,6 +55,8 @@ export class GetHDSegWitAddressDto extends DTOBase {
   @Field({ nullable: true, description: "The optional bit39 password", defaultValue: "" })
   @IsOptional()
   @IsString()
+  @MinLength(5)
+  @MaxLength(100)
   @Expose()
   password: string
 }

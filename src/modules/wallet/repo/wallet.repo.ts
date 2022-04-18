@@ -5,6 +5,7 @@ import * as ecc from "tiny-secp256k1"
 import { Inject, Service } from "typedi"
 
 import { NETWORK } from "../../../enum"
+import { Trace } from "../../../utils/logger/trace.util"
 
 interface IGetHDSegwitAddress {
   seed: string
@@ -20,6 +21,7 @@ interface IAddress {
 }
 
 @Service()
+@Trace({ perf: true, logInput: { enabled: true, beautify: true } })
 export class WalletRepo {
   @Inject("network")
   network: Record<NETWORK, Network>
@@ -38,10 +40,10 @@ export class WalletRepo {
     const extendedPublicKey = extended.neutered().toBase58()
 
     // default as p2wpkh
-    let address: string = payments.p2wpkh({ pubkey: extended.publicKey, network: this.network[networkKey] }).address
+    let address: string = payments.p2wpkh({ pubkey: extended.publicKey }).address
 
     if (networkKey === NETWORK.BITCOIN_P2WSH) {
-      address = payments.p2wsh({ pubkey: extended.publicKey, network: this.network[networkKey] }).address
+      address = payments.p2wsh({ pubkey: extended.publicKey }).address
     }
 
     return {

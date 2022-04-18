@@ -1,7 +1,7 @@
 import { plainToInstance } from "class-transformer"
 import { Field, ObjectType } from "type-graphql"
 
-@ObjectType("WalletAddressEntity")
+@ObjectType("WalletAddressEntity", { description: "The Address Entity" })
 export class AddressEntity {
   @Field({ description: "The hashed address given the seed" })
   address: string
