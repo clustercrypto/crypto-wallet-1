@@ -5,6 +5,11 @@ export const GRAPHQL_INTROSPECTION = Boolean(process.env.GRAPHQL_INTROSPECTION)
 export const GRAPHQL_DEBUG = Boolean(process.env.GRAPHQL_DEBUG)
 
 export enum CONSTANT {
-  SERVICE_NAME = "serviceName",
-  SERVICE_URL_SUFFIX = "/api/graphql/v1"
+  SERVICE_NAME = "SimpleWallet",
+  SERVICE_URL_SUFFIX = "/api/graphql"
+}
+
+export enum NETWORK {
+  BITCOIN_P2WPKH = "bitcoin_p2wpkh",
+  BITCOIN_P2WSH = "bitcoin_p2wsh"
 }

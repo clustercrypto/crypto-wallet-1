@@ -29,6 +29,8 @@ export const start = async (graphqlServer: ApolloServer<ExpressContext>) => {
 
   // start express server
   app.listen(SERVICE_PORT, () =>
-    Logger.info(`🚀 ${CONSTANT.SERVICE_NAME} service listening at ${SERVICE_PORT} in ${NODE_ENV} mode`)
+    Logger.info(
+      `🚀 ${CONSTANT.SERVICE_NAME} service listening at http://localhost:${SERVICE_PORT}${CONSTANT.SERVICE_URL_SUFFIX} in ${NODE_ENV} mode`
+    )
   )
 }

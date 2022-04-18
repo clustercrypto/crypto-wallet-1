@@ -23,6 +23,9 @@
     "apollo-server-core": "^3.4.0",
     "apollo-server-express": "^3.4.0",
     "axios": "^0.26.1",
+    "bip32": "^3.0.1",
+    "bip39": "^3.0.4",
+    "bitcoinjs-lib": "^6.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.1",
     "cli-highlight": "^2.1.11",
@@ -34,6 +37,7 @@
     "graphql": "^15.3.0",
     "http-status-codes": "^2.2.0",
     "reflect-metadata": "^0.1.13",
+    "tiny-secp256k1": "^2.2.1",
     "type-graphql": "^1.1.1",
     "typedi": "^0.10.0"
   },
