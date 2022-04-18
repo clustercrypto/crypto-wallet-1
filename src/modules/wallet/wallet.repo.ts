@@ -4,9 +4,9 @@ import { Network, payments } from "bitcoinjs-lib"
 import * as ecc from "tiny-secp256k1"
 import { Inject, Service } from "typedi"
 
-import { NETWORK } from "../../../enum"
-import { Trace } from "../../../utils/logger/trace.util"
-import { IAddress, IGetHDSegwitAddress, IGetMultiSigP2SHAddress } from "../interfaces/wallet.interface"
+import { NETWORK } from "../../enum"
+import { Trace } from "../../utils/logger/trace.util"
+import { IAddress, IGetHDSegwitAddress, IGetMultiSigP2SHAddress } from "./wallet.interface"
 
 @Service()
 @Trace({ perf: true, logInput: { enabled: true, beautify: true } })

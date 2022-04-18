@@ -1,11 +1,11 @@
 import { Arg, Query, Resolver } from "type-graphql"
 import { Inject, Service } from "typedi"
 
-import { Trace } from "../../../utils/logger/trace.util"
-import { GetHDSegWitAddressDto } from "../dto/getHDSegWitAddress.dto"
-import { GetMultiSigP2SHAddressDto } from "../dto/getMultiSigP2SHAddress.dto"
-import { AddressEntity } from "../entity/address.entity"
-import { WalletService } from "../service/wallet.service"
+import { Trace } from "../../utils/logger/trace.util"
+import { AddressEntity } from "./address.entity"
+import { GetHDSegWitAddressDto } from "./dto/getHDSegWitAddress.dto"
+import { GetMultiSigP2SHAddressDto } from "./dto/getMultiSigP2SHAddress.dto"
+import { WalletService } from "./wallet.service"
 
 @Trace({ perf: true, logInput: { enabled: true, beautify: true } })
 @Service()
