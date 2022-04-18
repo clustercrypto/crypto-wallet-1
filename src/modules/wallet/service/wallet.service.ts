@@ -2,6 +2,7 @@ import { Inject, Service } from "typedi"
 
 import { Trace } from "../../../utils/logger/trace.util"
 import { GetHDSegWitAddressDto } from "../dto/getHDSegWitAddress.dto"
+import { GetMultiSigP2SHAddressDto } from "../dto/getMultiSigP2SHAddress.dto"
 import { AddressEntity } from "../entity/address.entity"
 import { WalletRepo } from "../repo/wallet.repo"
 
@@ -12,6 +13,12 @@ export class WalletService {
   walletRepo: WalletRepo
 
   async getHDSegWitAddressBySeedAndPath(getHDSegWitAddressDto: GetHDSegWitAddressDto): Promise<AddressEntity> {
-    return this.walletRepo.getHDSegwitAddressBySeedAndPath(getHDSegWitAddressDto)
+    const addressObj = this.walletRepo.getHDSegwitAddressBySeedAndPath(getHDSegWitAddressDto)
+    return AddressEntity.fromObject(addressObj)
+  }
+
+  async getMultiSigP2SHAddress(getMultiSigP2SHAddressDto: GetMultiSigP2SHAddressDto): Promise<AddressEntity> {
+    const addressObj = this.walletRepo.getMultiSigP2SHAddress(getMultiSigP2SHAddressDto)
+    return AddressEntity.fromObject(addressObj)
   }
 }

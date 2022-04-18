@@ -6,19 +6,7 @@ import { Inject, Service } from "typedi"
 
 import { NETWORK } from "../../../enum"
 import { Trace } from "../../../utils/logger/trace.util"
-
-interface IGetHDSegwitAddress {
-  seed: string
-  path: string
-  network: string
-  password: string
-}
-
-interface IAddress {
-  address: string
-  privateKey: string
-  publicKey: string
-}
+import { IAddress, IGetHDSegwitAddress, IGetMultiSigP2SHAddress } from "../interfaces/wallet.interface"
 
 @Service()
 @Trace({ perf: true, logInput: { enabled: true, beautify: true } })
@@ -51,5 +39,13 @@ export class WalletRepo {
       publicKey: extendedPublicKey,
       address
     }
+  }
+
+  getMultiSigP2SHAddress(param: IGetMultiSigP2SHAddress): IAddress {
+    const { m, publicKeys: pubkeys } = param
+    const { address } = payments.p2sh({
+      redeem: payments.p2ms({ m, pubkeys })
+    })
+    return { address }
   }
 }
