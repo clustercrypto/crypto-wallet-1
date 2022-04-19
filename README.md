@@ -7,7 +7,7 @@ git clone git@github.com:GeekEast/crypto-wallet.git
 cd crypto-wallet && yarn
 ```
 
-## Run
+## Start Server
 ```sh
 yarn dev
 # open browser at http://localhost:9901/api/graphql
@@ -140,9 +140,13 @@ query WalletGetMultiSigP2SHAddress($input: WalletGetMultiSigP2SHAddressDto!) {
 - **Entity** will be a good entity to convert into a **DDD** domain object in future once the business get quite large and complex. It's also the candidate place to send domain **events** for asynchronous communication in a micro-service system.
 - **Utility**: Self-developed utilities are used as well. For example, the **trace** function automate logging the input into each layer and also measure the performance.
 - **Code Reuse**: I have developed one class called `DTOBase` to extract common code for DTO class to do transformation, validation. Especially, developer could override `validate` method to hook some complex validation logic into DTO. e.g validate at least 2 fields should be provided.
+- **Development Tools**:
+  - github action is used to run unit tests and detect if the branch is not rebased from `main` branch
+  - husky is used to do eslint, prettier and conventional commit check when running `git commit ...` command
+  - clean git history for collaboration
 
 ### References
-- [Bitcoin Address Format](https://allprivatekeys.com/bitcoin-address-format)
 - [Bitcoin Address Prefix List](https://github.com/citizen010/bitcoin-prefixes-address-list)
 - [Bitcoin Explorer](https://www.blockchain.com/explorer)
 - [Online bitcoin cli](https://chainquery.com/)
+- [Learn Bitcoin](https://learnmeabitcoin.com/)
