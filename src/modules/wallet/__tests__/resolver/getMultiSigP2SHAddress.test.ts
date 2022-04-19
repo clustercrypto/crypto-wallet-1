@@ -7,7 +7,7 @@ import { AddressEntity } from "../../entity/address.entity"
 import { WalletResolver } from "../../wallet.resolver"
 import { WalletService } from "../../wallet.service"
 
-describe("WalletResolver.getHDSegWitAddress", () => {
+describe("WalletResolver.getMultiSigP2SHAddress", () => {
   const schema = buildSchemaSync({
     resolvers: [WalletResolver],
     container: Container,

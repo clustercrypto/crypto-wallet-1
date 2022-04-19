@@ -15,7 +15,7 @@ export class WalletService {
   walletRepo: WalletRepo
 
   async generateSeed(generateSeedDto: GenerateSeedDto): Promise<SeedEntity> {
-    const seedObj = this.walletRepo.generateSeed(generateSeedDto)
+    const seedObj = this.walletRepo.generateSeed({ ...generateSeedDto })
     return SeedEntity.fromObject(seedObj)
   }
 
