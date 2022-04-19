@@ -7,12 +7,15 @@ export interface IGetHDSegwitAddress {
 
 export interface IGetMultiSigP2SHAddress {
   m: number
-  publicKeys: Buffer[]
+  publicKeys: string[]
 }
 export interface IAddress {
   address: string
-  privateKey?: string
-  publicKey?: string
+  privateKeyBase58?: string
+  publicKeyBase58?: string
+  privateKeyHexDecimal?: string
+  publicKeyHexDecimal?: string
+  redeemScriptsHexDecimal?: string
 }
 
 export interface IGenerateSeed {

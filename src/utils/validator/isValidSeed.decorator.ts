@@ -1,6 +1,7 @@
-import { validateMnemonic } from "bip39"
 import { registerDecorator, ValidationArguments, ValidationOptions } from "class-validator"
-import isEnglish from "is-english"
+
+import { Logger } from "../logger/logger.util"
+import { validateMnemonic } from "../wordlist"
 
 export function IsSeedValid(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
@@ -15,10 +16,11 @@ export function IsSeedValid(validationOptions?: ValidationOptions) {
       },
       validator: {
         validate(seed: string, _args: ValidationArguments) {
-          if (!isEnglish(seed)) {
+          if (!validateMnemonic(seed)) {
+            Logger.error("Seed phrase is not valid")
             return false
           }
-          return validateMnemonic(seed)
+          return true
         }
       }
     })

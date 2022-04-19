@@ -6,7 +6,6 @@ import * as ecc from "tiny-secp256k1"
 import { Inject, Service } from "typedi"
 
 import { NETWORK } from "../../enum"
-import { Logger } from "../../utils/logger/logger.util"
 import { Trace } from "../../utils/logger/trace.util"
 import { getWordList } from "../../utils/wordlist"
 import { IAddress, IGenerateSeed, IGetHDSegwitAddress, IGetMultiSigP2SHAddress, ISeed } from "./wallet.interface"
@@ -19,44 +18,60 @@ export class WalletRepo {
 
   generateSeed(generateSeed: IGenerateSeed): ISeed {
     const { length, language, password } = generateSeed
+    // generate mnemonic words
     const mnemonic = generateMnemonic((length / 3) * 32, crypto.randomBytes, getWordList(language.toUpperCase()))
-    Logger.warn(mnemonic)
+    // generate seed
     const seed = mnemonicToSeedSync(mnemonic, password).toString("hex")
+
     return { mnemonic, seed }
   }
 
   getHDSegwitAddressBySeedAndPath(param: IGetHDSegwitAddress): IAddress {
     const { seed: phrase, path, password, network: networkKey } = param
+    // convert mnemonic to seed as buffer
     const seed = mnemonicToSeedSync(phrase, password)
 
-    // generate master keys
+    // generate master node
     const bip32 = BIP32Factory(ecc)
-
     const master = bip32.fromSeed(seed, this.network[networkKey])
 
+    // generate the extended node given client's path
     const extended = master.derivePath(path)
-    const extendedPrivateKey = extended.toBase58()
-    const extendedPublicKey = extended.neutered().toBase58()
 
-    // default as p2wpkh
-    let address: string = payments.p2wpkh({ pubkey: extended.publicKey }).address
+    // base58 format
+    const extendedPrivateKeyBase58 = extended.toBase58()
+    const extendedPublicKeyBase58 = extended.neutered().toBase58()
 
-    if (networkKey === NETWORK.BITCOIN_P2WSH) {
-      address = payments.p2wsh({ pubkey: extended.publicKey }).address
-    }
+    // hex-decimal format
+    const extendedPrivateKeyHex = extended.privateKey.toString("hex")
+    const extendedPublicKeyHex = extended.publicKey.toString("hex")
+
+    // generate client address, use P2WPKH by default
+    // publicKey can be generated from payment object, the value is the same.
+    const payment = payments.p2wpkh({ pubkey: extended.publicKey })
 
     return {
-      privateKey: extendedPrivateKey,
-      publicKey: extendedPublicKey,
-      address
+      privateKeyBase58: extendedPrivateKeyBase58,
+      publicKeyBase58: extendedPublicKeyBase58,
+      privateKeyHexDecimal: extendedPrivateKeyHex,
+      publicKeyHexDecimal: extendedPublicKeyHex,
+      address: payment.address
     }
   }
 
   getMultiSigP2SHAddress(param: IGetMultiSigP2SHAddress): IAddress {
-    const { m, publicKeys: pubkeys } = param
-    const { address } = payments.p2sh({
-      redeem: payments.p2ms({ m, pubkeys })
-    })
-    return { address }
+    const { m, publicKeys } = param
+
+    // from string to Buffer
+    const pubkeys = publicKeys.map((key) => Buffer.from(key, "hex"))
+
+    // generate redeem script (multiple-signature)
+    const redeem = payments.p2ms({ m, pubkeys })
+    const redeemScriptsHexDecimal = redeem.output.toString("hex")
+
+    // generate Pay-To-Script-Hash (P2SH) address
+    const { address } = payments.p2sh({ redeem })
+
+    return { address, redeemScriptsHexDecimal }
   }
 }

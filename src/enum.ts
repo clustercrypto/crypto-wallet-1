@@ -10,6 +10,6 @@ export enum CONSTANT {
 }
 
 export enum NETWORK {
-  BITCOIN_P2WPKH = "bitcoin_p2wpkh",
-  BITCOIN_P2WSH = "bitcoin_p2wsh"
+  BITCOIN_P2WPKH = "bitcoin_p2wpkh"
+  // BITCOIN_P2WSH = "bitcoin_p2wsh"
 }

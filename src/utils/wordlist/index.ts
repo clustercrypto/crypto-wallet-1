@@ -1,3 +1,4 @@
+import { Logger } from "../logger/logger.util"
 import { CHINESE_SIMPLIFIED } from "./chinese_simplified"
 import { CHINESE_TRADITIONAL } from "./chinese_traditional"
 import { CZECH } from "./czech"
@@ -45,4 +46,17 @@ export const getWordList = (wordList?: string) => {
   }
 
   return WORD_LISTS[wordList]
+}
+
+export const validateMnemonic = (phrase: string, language = "ENGLISH") => {
+  const words = phrase.split(" ")
+  const WORD_LIST: string[] = WORD_LISTS[language]
+
+  for (const word of words) {
+    if (!WORD_LIST.includes(word)) {
+      Logger.error(`${word} is not included in the mnemonic dictionary`)
+      return false
+    }
+  }
+  return true
 }

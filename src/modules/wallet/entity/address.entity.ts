@@ -7,13 +7,25 @@ export class AddressEntity {
   @Expose()
   address: string
 
-  @Field({ description: "The private key given the seed", nullable: true })
+  @Field({ description: "The private key in base58 format", nullable: true })
   @Expose()
-  privateKey?: string
+  privateKeyBase58?: string
 
-  @Field({ description: "The public key given the seed", nullable: true })
+  @Field({ description: "The public key in base58 format", nullable: true })
   @Expose()
-  publicKey?: string
+  publicKeyBase58?: string
+
+  @Field({ description: "The private key in hex decimal format", nullable: true })
+  @Expose()
+  privateKeyHexDecimal?: string
+
+  @Field({ description: "The public key in hex decimal format", nullable: true })
+  @Expose()
+  publicKeyHexDecimal?: string
+
+  @Field({ description: "The redeem scripts hash", nullable: true })
+  @Expose()
+  redeemScriptsHexDecimal?: string
 
   static async fromObject(obj: Object): Promise<AddressEntity> {
     if (!obj) return null
