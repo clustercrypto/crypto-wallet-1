@@ -23,7 +23,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14
-      - name: Install
+      - name: Install dependency
         run: yarn install
-      - name: Test
+      - name: Run unit test
         run: yarn test
+      - name: Update code coverage badge
+        run: npx update-badge
+      - name: Update README.md
+        uses: mikeal/publish-to-github-action@1.0.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
