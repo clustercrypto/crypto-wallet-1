@@ -1,6 +1,6 @@
 
 # Simple Crypto Wallet API
-
+ ![check-code-coverage](https://img.shields.io/badge/code--coverage-78%25-yellow) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ## Installation
 ```sh
 git clone git@github.com:GeekEast/crypto-wallet.git

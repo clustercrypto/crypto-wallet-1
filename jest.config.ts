@@ -13,7 +13,8 @@ module.exports = {
     "src/modules/**/*.ts",
     "!src/**/*.{entity,dto,provider,schema,error,d}.ts",
     "!src/**/{index,constants}.ts"
-  ]
+  ],
+  coverageReporters: ["json-summary"]
   // coverageThreshold: {
   //   global: {
   //     branches: 95,
