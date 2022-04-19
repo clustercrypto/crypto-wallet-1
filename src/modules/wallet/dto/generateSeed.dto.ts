@@ -12,7 +12,7 @@ export class GenerateSeedDto extends DTOBase {
   @Expose()
   language: string
 
-  @Field({ description: "The number of words in the mnemonic words", nullable: true, defaultValue: "12" })
+  @Field({ description: "The number of words in the mnemonic words", nullable: true, defaultValue: 12 })
   @IsOptional()
   @IsIn([12, 15, 18, 24])
   @Expose()

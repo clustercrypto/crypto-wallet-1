@@ -11,7 +11,7 @@ export class SeedEntity {
   @Expose()
   seed: string
 
-  static async fromObject(obj: Object): Promise<SeedEntity> {
+  static fromObject(obj: Object): SeedEntity {
     if (!obj) return null
     return plainToInstance(SeedEntity, obj)
   }

@@ -27,7 +27,7 @@ export class AddressEntity {
   @Expose()
   redeemScriptsHexDecimal?: string
 
-  static async fromObject(obj: Object): Promise<AddressEntity> {
+  static fromObject(obj: Object): AddressEntity {
     if (!obj) return null
     return plainToInstance(AddressEntity, obj)
   }

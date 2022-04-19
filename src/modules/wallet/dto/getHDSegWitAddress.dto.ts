@@ -45,7 +45,7 @@ export class GetHDSegWitAddressDto extends DTOBase {
   @IsPathAccountLevelHardened()
   @IsPathNumberOrHardenedNumber()
   @MinLength(4)
-  @MaxLength(300)
+  @MaxLength(100)
   @Expose()
   path: string
 
