@@ -150,3 +150,4 @@ query WalletGetMultiSigP2SHAddress($input: WalletGetMultiSigP2SHAddressDto!) {
 - [Bitcoin Explorer](https://www.blockchain.com/explorer)
 - [Online bitcoin cli](https://chainquery.com/)
 - [Learn Bitcoin](https://learnmeabitcoin.com/)
+- [M,N multi-sig P2SH Limits](https://bitcoin.stackexchange.com/questions/23893/what-are-the-limits-of-m-and-n-in-m-of-n-multisig-addresses)
