@@ -14,3 +14,14 @@ export interface IAddress {
   privateKey?: string
   publicKey?: string
 }
+
+export interface IGenerateSeed {
+  length: number
+  language: string
+  password?: string
+}
+
+export interface ISeed {
+  mnemonic: string
+  seed: string
+}

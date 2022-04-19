@@ -2,9 +2,11 @@ import { Arg, Query, Resolver } from "type-graphql"
 import { Inject, Service } from "typedi"
 
 import { Trace } from "../../utils/logger/trace.util"
-import { AddressEntity } from "./address.entity"
+import { GenerateSeedDto } from "./dto/generateSeed.dto"
 import { GetHDSegWitAddressDto } from "./dto/getHDSegWitAddress.dto"
 import { GetMultiSigP2SHAddressDto } from "./dto/getMultiSigP2SHAddress.dto"
+import { AddressEntity } from "./entity/address.entity"
+import { SeedEntity } from "./entity/seed.entity"
 import { WalletService } from "./wallet.service"
 
 @Trace({ perf: true, logInput: { enabled: true, beautify: true } })
@@ -13,6 +15,15 @@ import { WalletService } from "./wallet.service"
 export class WalletResolver {
   @Inject()
   walletService: WalletService
+
+  @Query(() => SeedEntity, {
+    name: "WalletGenerateSeed",
+    description: "Generate a mnemonic word and seed"
+  })
+  async generateSeed(@Arg("input") input: GenerateSeedDto): Promise<SeedEntity> {
+    const validatedDto = GenerateSeedDto.fromObject<GenerateSeedDto>(input)
+    return this.walletService.generateSeed(validatedDto)
+  }
 
   @Query(() => AddressEntity, {
     name: "WalletGetHDSegWitAddress",

@@ -33,6 +33,7 @@ export class GetHDSegWitAddressDto extends DTOBase {
       \n - currently we only support purpose to be 84' \
       \n - coin_type to be 0' (bitcoin) \
       \n - account level must be hardened to improve security\
+      \n e.g "m/84'/0'/0'/0/0", (crypto wallet uses this one to generate a bitcoin address for receiving)
       `
   })
   @IsNotEmpty()

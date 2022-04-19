@@ -42,3 +42,8 @@ query WalletGetMultiSigP2SHAddress($input: WalletGetMultiSigP2SHAddressDto!) {
 | Environment | URL                               |
 | ----------- | --------------------------------- |
 | Local       | http://localhost:9901/api/graphql |
+
+
+### References
+- [Bitcoin Address Format](https://allprivatekeys.com/bitcoin-address-format)
+- [Bitcoin Address Prefix List](https://github.com/citizen010/bitcoin-prefixes-address-list)
