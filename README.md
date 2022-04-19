@@ -1,18 +1,40 @@
 
 # Simple Crypto Wallet API
- ![check-code-coverage](https://img.shields.io/badge/code--coverage-78%25-yellow) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+ ![check-code-coverage](https://img.shields.io/badge/code--coverage-78%25-yellow) [![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) [![TypeScript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://typescriptlang.org) 
+
+  - [Installation](#installation)
+  - [Run Server](#run-server)
+  - [Run Tests](#run-tests)
+  - [Query Example](#query-example)
+    - [Generate a seed](#generate-a-seed)
+    - [Generate a HD SegWit Address](#generate-a-hd-segwit-address)
+    - [Generate a multi-sig P2SH Address](#generate-a-multi-sig-p2sh-address)
+  - [Overview](#overview)
+    - [Correctness](#correctness)
+    - [Security](#security)
+    - [Documents](#documents)
+    - [Coding](#coding)
+  - [References](#references)
+
+
 ## Installation
 ```sh
 git clone git@github.com:GeekEast/crypto-wallet.git
 cd crypto-wallet && yarn
 ```
 
-## Start Server
+## Run Server
 ```sh
 yarn dev
 # open browser at http://localhost:9901/api/graphql
 ```
-## Query
+
+## Run Tests
+```sh
+yarn test
+yarn tdd # for Test Driven Development
+```
+## Query Example
 ### Generate a seed
 - graphql query
 ```graphql
@@ -134,6 +156,7 @@ query WalletGetMultiSigP2SHAddress($input: WalletGetMultiSigP2SHAddressDto!) {
 
 
 ### Coding
+- **Testing**: Unit tests is 100% covered.
 - **Dependency-Injection**: Dependency-Injection and Provider Pattern is utilized to create loosely-coupled codebase.
 - **Clean Architecture**: separating `src` folder into 3-layer structure: `resolver`, `service`, `repo`
 - **Validation**: DTO is used to validate input externally from API and ban any bad request as early as possible.
@@ -145,7 +168,7 @@ query WalletGetMultiSigP2SHAddress($input: WalletGetMultiSigP2SHAddressDto!) {
   - husky is used to do eslint, prettier and conventional commit check when running `git commit ...` command
   - clean git history for collaboration
 
-### References
+## References
 - [Bitcoin Address Prefix List](https://github.com/citizen010/bitcoin-prefixes-address-list)
 - [Bitcoin Explorer](https://www.blockchain.com/explorer)
 - [Online bitcoin cli](https://chainquery.com/)
