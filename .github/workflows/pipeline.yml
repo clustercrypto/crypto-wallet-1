@@ -27,9 +27,9 @@ jobs:
         run: yarn install
       - name: Run unit test
         run: yarn test
-      - name: Update code coverage badge
-        run: npx update-badge
-      - name: Update README.md
-        uses: mikeal/publish-to-github-action@1.0.0
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: disable husky
+        run: yarn husky uninstall
+      - name: Generating coverage badges
+        uses: jpb06/jest-badges-action@latest
+        with:
+          branches: main
