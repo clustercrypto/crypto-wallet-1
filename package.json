@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "apollo-server": "^3.4.0",
-    "apollo-server-core": "^3.4.0",
+    "apollo-server-core": "^3.12.1",
     "apollo-server-express": "^3.4.0",
     "bip32": "^3.0.1",
     "bip39": "^3.0.4",
